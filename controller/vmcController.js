@@ -8,6 +8,7 @@ const addVision = async (req, res) => {
     const files = req.files || [];
     const { userId, companyId } = req.user;
     console.log(req.user);
+    console.log(req.body.data);
 
     const visions = files.map((file, index) => {
       const visionDescription = req.body[`visionDescription_${index}`] || '';
@@ -82,7 +83,8 @@ const addCore = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-  try {
+  try {                                                                                                                       
+    
     const { userId, companyId } = req.user;
     const all = await VisionMissionCore.findAll({
       where: {

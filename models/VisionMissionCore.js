@@ -18,6 +18,10 @@ const VisionMissionCore = sequelize.define('VisionMissionCore', {
       key: 'id',
     },
   },
+   vmc: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
   vision: {
     type: DataTypes.JSON,
     allowNull: true,
