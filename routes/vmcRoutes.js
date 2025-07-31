@@ -5,16 +5,15 @@ const authenticate = require('../middleware/authMiddleware');
 const {
   addVision,
   addMission,
-  addCore,
   getAll,
   getById,
   updateById,
   deleteById,
+  deleteSpecificItem,
 } = require('../controller/vmcController');
 
-router.post('/vision', authenticate, sectionUpload.vision.array('visionImage', 10), addVision);
+router.post('/vision', authenticate, sectionUpload.vision.any(), addVision);
 router.post('/mission', authenticate, sectionUpload.mission.array('missionImage'), addMission);
-router.post('/core', authenticate, sectionUpload.core.array('coreImage'), addCore);
 router.get('/', authenticate, getAll);
 router.get('/:id', authenticate, getById);
 router.put(
@@ -33,6 +32,6 @@ router.put(
   updateById
 );
 router.delete('/:id', authenticate, deleteById);
-
+router.delete('/:id/item', authenticate, deleteSpecificItem);
 
 module.exports = router;

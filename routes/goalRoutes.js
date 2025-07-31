@@ -9,6 +9,8 @@ router.get('/', authenticate, goalController.getGoals);
 router.get('/:id', authenticate, goalController.getGoalById);
 router.put('/:id', authenticate, upload.array('images', 10), goalController.updateGoal);
 router.delete('/:id', authenticate, goalController.deleteGoal);
+// Delete a single section (sub-goal) by ID (for edit page section delete)
+router.delete('/section/:id', authenticate, goalController.deleteGoalSection);
 
 module.exports = router;
 

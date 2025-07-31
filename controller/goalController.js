@@ -1,3 +1,20 @@
+// Delete a single section (sub-goal) by ID (for edit page section delete)
+exports.deleteGoalSection = async (req, res) => {
+  try {
+    const goal = await Goal.findOne({
+      where: {
+        id: req.params.id,
+        userId: req.user.userId
+      }
+    });
+    if (!goal) return res.status(404).json({ error: 'Goal not found' });
+    await goal.destroy();
+    res.json({ message: 'Goal section deleted successfully' });
+  } catch (err) {
+    console.error('Delete Goal Section Error:', err);
+    res.status(500).json({ error: 'Failed to delete goal section' });
+  }
+};
 const Goal = require('../models/Goal');
 
 exports.createGoal = async (req, res) => {
@@ -34,7 +51,7 @@ exports.createGoal = async (req, res) => {
 
 exports.getGoals = async (req, res) => {
   try {
-    console.log('req.user in getGoals:', req.user);
+    console.log('req.user from getGoals:', req.user);
     const goals = await Goal.findAll({
       // where: { companyId: req.user.companyId },
       where: { userId: req.user.userId },
@@ -66,9 +83,20 @@ exports.getGoalById = async (req, res) => {
 
 exports.updateGoal = async (req, res) => {
   try {
-    const { mainTitle, year, title, points } = req.body;
+    const { mainTitle, year, title, points, existingImages } = req.body;
     const parsedPoints = typeof points === 'string' ? JSON.parse(points) : points;
     const imageFiles = req.files?.map(file => file.filename) || [];
+
+    // Parse existingImages (may be string or array)
+    let keepImages = [];
+    if (existingImages) {
+      if (Array.isArray(existingImages)) {
+        keepImages = existingImages;
+      } else if (typeof existingImages === 'string') {
+        // If multiple, FormData sends as array, else as string
+        keepImages = [existingImages];
+      }
+    }
 
     const goal = await Goal.findOne({
       where: {
@@ -85,9 +113,9 @@ exports.updateGoal = async (req, res) => {
     goal.title = title;
     goal.points = parsedPoints;
 
-    // Update imageURL only if new images uploaded
-    if (imageFiles.length) {
-      goal.imageURL = imageFiles;
+    // Merge kept images and new uploads
+    if (keepImages.length || imageFiles.length) {
+      goal.imageURL = [...keepImages, ...imageFiles];
     }
 
     await goal.save();

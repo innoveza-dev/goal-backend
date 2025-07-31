@@ -140,6 +140,7 @@ async function login(req, res) {
         mobile: user.mobile,
         password: user.password,
         role: user.role,
+        photo: user.photo,
         companyId: user.companyProfile.id,
         companyProfile: user.companyProfile || null,
       },

@@ -22,7 +22,7 @@ const VisionMissionCore = sequelize.define('VisionMissionCore', {
     type: DataTypes.JSON,
     allowNull: true,
   },
-  vision: {
+    vision: {
     type: DataTypes.JSON,
     allowNull: true,
   },

@@ -12,8 +12,8 @@ User.hasMany(Goal, { foreignKey: 'userId', as: 'goals' });
 Goal.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 // CompanyProfile → Goal (1:M)
-CompanyProfile.hasMany(Goal, { foreignKey: 'companyId' });
-Goal.belongsTo(CompanyProfile, { foreignKey: 'companyId' });
+// CompanyProfile.hasMany(Goal, { foreignKey: 'companyId' });
+// Goal.belongsTo(CompanyProfile, { foreignKey: 'companyId' });
 
 
 module.exports = { User, CompanyProfile, VisionMissionCore, Goal };

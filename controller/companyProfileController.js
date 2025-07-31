@@ -155,15 +155,16 @@ const updateCompanyProfile = async (req, res) => {
       }
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+
     const logoUrl = req.file ? req.file.filename : profile.logoUrl;
 
-
-    await profile.update({
+    // Convert empty string website to null to pass isUrl validation
+    if (website === '') website = null;
+    // Build update object
+    const updateData = {
       logoUrl,
       companyName,
       emailId,
-      password: hashedPassword,
       website,
       companyType,
       mobileNumber,
@@ -179,7 +180,14 @@ const updateCompanyProfile = async (req, res) => {
       socialInstagram,
       socialTwitter,
       socialYoutube
-    });
+    };
+
+    // Only update password if provided
+    if (password) {
+      updateData.password = await bcrypt.hash(password, 10);
+    }
+
+    await profile.update(updateData);
 
     const data = profile.toJSON();
     data.socialLinks = {
