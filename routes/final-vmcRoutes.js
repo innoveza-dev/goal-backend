@@ -31,9 +31,7 @@ router.post('/vision', authenticate, sectionUpload.vision.any(), addVision);
 router.post('/mission', authenticate, sectionUpload.mission.array('missionImage'), addMission);
 router.get('/', authenticate, getAll);
 router.get('/:id', authenticate, getById);
-router.put(
-  '/:id', authenticate,
-  (req, res, next) => {
+router.put('/:id', authenticate,(req, res, next) => {
     const field = req.headers['upload-section'];
     if (field === 'vision') {
       return sectionUpload.vision.array('visionImage')(req, res, next);
