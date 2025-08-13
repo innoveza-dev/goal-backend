@@ -12,7 +12,7 @@ const companyProfileRoutes = require('./routes/companyProfileRoutes');
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://sysline.in', 'https://app.sysline.in'],
+  origin: ['http://localhost:3000', 'https://sysline.in', 'https://api.sysline.in'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
