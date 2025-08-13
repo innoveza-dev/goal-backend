@@ -18,12 +18,12 @@ const corsOptions = {
   credentials: true,
 };
 
+
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options('/*', cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/companyLogos', express.static(path.join(__dirname, 'uploads/companyLogos')));
 app.use('/visions', express.static(path.join(__dirname, 'uploads/visions')));
