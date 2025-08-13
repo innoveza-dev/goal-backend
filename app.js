@@ -12,12 +12,15 @@ const companyProfileRoutes = require('./routes/companyProfileRoutes');
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://app.sysline.in'], // Replace with your actual frontend URLs
+  origin: ['http://localhost:3000', 'https://sysline.in', 'https://app.sysline.in'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  credentials: true, // Only if your frontend sends cookies or authorization headers
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
