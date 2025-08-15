@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 
 const VisionMissionCore = sequelize.define('VisionMissionCore', {
+  tableName: 'visionmissioncores',
   userId: {
     type: DataTypes.INTEGER,
     allowNull: true,
