@@ -3,7 +3,6 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 
 const User = sequelize.define('User', {
-  tableName: 'users',
   companyName: { type: DataTypes.STRING, allowNull: false },  
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
@@ -17,6 +16,7 @@ const User = sequelize.define('User', {
   anniversaryDate: { type: DataTypes.DATEONLY, allowNull: true },
   role: { type: DataTypes.ENUM('admin', 'superadmin'), allowNull: false, defaultValue: 'admin' },
 }, {
+    tableName: 'users',
   timestamps: true,
 });
 

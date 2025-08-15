@@ -3,7 +3,6 @@ const { sequelize } = require('../config/db');
 const User = require('./User'); 
 
 const Goal = sequelize.define('Goal', {
-  tableName: 'goals',
   mainTitle: {
     type: DataTypes.STRING,
     allowNull: false
@@ -45,6 +44,8 @@ const Goal = sequelize.define('Goal', {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE'
   }
+},{
+    tableName: 'goals',
 });
 
 module.exports = Goal;

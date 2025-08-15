@@ -2,7 +2,6 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 
 const CompanyProfile = sequelize.define('CompanyProfile', {
-  tableName: 'companyprofiles',
   userId: {
     type: DataTypes.INTEGER,
     allowNull: true,
@@ -31,6 +30,7 @@ const CompanyProfile = sequelize.define('CompanyProfile', {
   socialTwitter: { type: DataTypes.STRING, allowNull: true, validate: { isUrl: true } },
   socialYoutube: { type: DataTypes.STRING, allowNull: true, validate: { isUrl: true } },
 }, {
+  tableName: 'companyprofiles',
   timestamps: true,
 });
 
