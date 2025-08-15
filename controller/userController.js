@@ -123,7 +123,7 @@ async function login(req, res) {
 
 
     const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role, companyId: user.companyProfile.id},
+      { userId: user.id, email: user.email, role: user.role, companyId: user.companyProfile?.id || null},
       JWT_SECRET,
       { expiresIn: '7d' }
     );
@@ -141,7 +141,7 @@ async function login(req, res) {
         password: user.password,
         role: user.role,
         photo: user.photo,
-        companyId: user.companyProfile.id,
+        companyId: user.companyProfile?.id || null,
         companyProfile: user.companyProfile || null,
       },
     });
