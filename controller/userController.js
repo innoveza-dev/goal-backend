@@ -40,12 +40,12 @@ async function signup(req, res) {
     }
 
     let role = 'admin';
-    if (
-      firstName.toLowerCase() === 'bansi' &&
-      email.toLowerCase() === 'bansi.innoveza@gmail.com'
-    ) {
-      role = 'superadmin';
-    }
+    // if (
+    //   firstName.toLowerCase() === 'bansi' &&
+    //   email.toLowerCase() === 'bansi.innoveza@gmail.com'
+    // ) {
+    //   role = 'superadmin';
+    // }
 
     const newUser = await User.create({
       companyId: company.id,
